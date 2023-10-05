@@ -1,0 +1,56 @@
+ul, li, p, button {
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+}
+
+.Container {
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.App {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    padding-top: 20px;
+    background-color: aqua;
+}
+
+.form-group input {
+    width: 260px;
+}
+
+.name-number {
+    margin-top: 20px;
+}
+
+.name-number li {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
+    justify-content: space-between;
+}
+
+.Add-Contacts {
+    margin-top: 15px;
+    padding-bottom: 20px;
+}
+
+.Add-Contacts button {
+    padding: 5px 10px;
+}
+
+.Search {
+    margin-bottom: 30px;
+}
+
+.Search input {
+    width: 260px;
+}
