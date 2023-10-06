@@ -4,7 +4,7 @@ import { deleteContact } from './ContactsSlice';
 
 
 const ContactList = ({ visibleСontactsFilter }) => {
-  console.log('visibleСontactsFilter', visibleСontactsFilter)
+  // console.log('visibleСontactsFilter', visibleСontactsFilter)
   const dispatch = useDispatch();
   
   return (
