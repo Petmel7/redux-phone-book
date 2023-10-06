@@ -6,33 +6,34 @@ import ContactList from "./components/ContactList";
 import './components/Contacts.css';
 import './App.css';
 import { useDispatch, useSelector } from "react-redux";
-import { addContact, deleteContact } from './components/ContactsSlice.js';
+import { addContact } from './components/ContactsSlice.js';
 import { setFilter } from "./components/FilterSlice";
 
 function App() {
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts);
-  const filter = useSelector(state => state.filter);
-  // const [contacts, setContacts] = useState([]);
-  // const [filter, setFilter] = useState('');
+  const contactsState = useSelector(state => state.contacts);
+  const filterState = useSelector(state => state.filter);
+
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
+// ===========================================
   useEffect(() => {
-    const storedContacts = JSON.parse(localStorage.getItem('contacts'));
-    if (storedContacts) {
-      dispatch(addContact(storedContacts));
-    }
+    // Отримати дані з Local Storage під час завантаження компонента
+    const storedContacts = JSON.parse(localStorage.getItem("contacts")) ?? [];
+    storedContacts.forEach((contact) => dispatch(addContact(contact)));
   }, [dispatch]);
 
   useEffect(() => {
-    localStorage.setItem('contacts', JSON.stringify(contacts));
-  }, [contacts]);
+    // Зберегти дані в Local Storage кожного разу, коли `contactsState` оновлюється
+    localStorage.setItem("contacts", JSON.stringify(contactsState));
+  }, [contactsState]);
 
+// ===========================================
   const submitPhoneBook = event => {
     event.preventDefault();
 
-    const existingContact = contacts.find(contact => contact.name === name);
+    const existingContact = contactsState.find(contact => contact.name === name);
     if (existingContact) {
       alert(`This name ${name} already exists`);
       return;
@@ -50,6 +51,7 @@ function App() {
     setNumber('');
   };
 
+// ===========================================
   const foneBookChange = event => {
     const { name, value } = event.target;
     if (name === "name") {
@@ -59,24 +61,18 @@ function App() {
     }
   };
 
-  const filterChange = event => {
-    dispatch(setFilter(event.currentTarget.value));
-  };
-
+  // ===========================================
   const getVisibleСontacts = () => {
-    const normalizeFilter = filter.toLowerCase();
+    const normalizeFilter = filterState.toLowerCase();
 
-    return contacts.filter(contact =>
+    return contactsState.filter(contact =>
       contact.name.toLowerCase().includes(normalizeFilter)
     );
   };
 
-  const deleteContacts = contactId => {
-    dispatch(deleteContact(contactId))
-  };
-
   const visibleСontactsFilter = getVisibleСontacts();
 
+// ===========================================
   return (
     <div className="App Container">
       <ContactForm
@@ -92,14 +88,13 @@ function App() {
       <label className="Search">
         Search
         <input type="text"
-          value={filter}
-          onChange={filterChange} />
+          value={filterState}
+          onChange={e => dispatch(setFilter(e.target.value))}
+        />
       </label>
 
       <ContactList
-        contacts={visibleСontactsFilter}
-        deleteContacts={deleteContacts}
-      />
+        visibleСontactsFilter={visibleСontactsFilter} />
     </div>
   );
 };
