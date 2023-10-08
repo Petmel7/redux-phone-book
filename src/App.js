@@ -11,23 +11,44 @@ import { setFilter } from "./components/FilterSlice";
 
 function App() {
   const dispatch = useDispatch();
-  const contactsState = useSelector(state => state.contacts);
+  const contactsState = useSelector(state => state.contacts.items);
+  // console.log('contactsState', contactsState)
   const filterState = useSelector(state => state.filter);
 
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
 // ===========================================
-  useEffect(() => {
-    // Отримати дані з Local Storage під час завантаження компонента
-    const storedContacts = JSON.parse(localStorage.getItem("contacts")) ?? [];
-    storedContacts.forEach((contact) => dispatch(addContact(contact)));
-  }, [dispatch]);
+//     // Отримати дані з Local Storage під час завантаження компонента
+//   useEffect(() => {
+//   const storedContacts = JSON.parse(localStorage.getItem("items")) ?? [];
+//   if (Array.isArray(storedContacts)) {
+//     storedContacts.forEach((contact) => dispatch(addContact(contact)));
+//   }
+// }, [dispatch]);
 
-  useEffect(() => {
-    // Зберегти дані в Local Storage кожного разу, коли `contactsState` оновлюється
-    localStorage.setItem("contacts", JSON.stringify(contactsState));
-  }, [contactsState]);
+//   useEffect(() => {
+//     // Зберегти дані в Local Storage кожного разу, коли `contactsState` оновлюється
+//     localStorage.setItem("items", JSON.stringify(contactsState));
+  //   }, [contactsState]);
+  
+  
+    fetch('https://65228621f43b1793841497a2.mockapi.io/contacts', {
+        method: 'GET',
+        headers: { 'content-type': 'application/json' },
+    }).then(res => {
+        if (res.ok) {
+            return res.json();
+        }
+        console.log('res', res)
+        // handle error
+    }).then(contacts => {
+      console.log('contacts', contacts)
+        // Do something with the list of tasks
+    }).catch(error => {
+      // handle error
+      console.log('error', error)
+    })
 
 // ===========================================
   const submitPhoneBook = event => {
@@ -65,10 +86,11 @@ function App() {
   const getVisibleСontacts = () => {
     const normalizeFilter = filterState.toLowerCase();
 
-    return contactsState.filter(contact =>
-      contact.name.toLowerCase().includes(normalizeFilter)
-    );
+      return contactsState.filter(contact =>
+        contact.name.toLowerCase().includes(normalizeFilter)
+      )
   };
+  // console.log('contactsState filter;', contactsState);
 
   const visibleСontactsFilter = getVisibleСontacts();
 
