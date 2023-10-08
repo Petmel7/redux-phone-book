@@ -8,6 +8,7 @@ import './App.css';
 import { useDispatch, useSelector } from "react-redux";
 import { addContact } from './components/ContactsSlice.js';
 import { setFilter } from "./components/FilterSlice";
+import axios from "axios";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,22 +34,26 @@ function App() {
   //   }, [contactsState]);
   
   
-    fetch('https://65228621f43b1793841497a2.mockapi.io/contacts', {
-        method: 'GET',
-        headers: { 'content-type': 'application/json' },
-    }).then(res => {
-        if (res.ok) {
-            return res.json();
-        }
-        console.log('res', res)
-        // handle error
-    }).then(contacts => {
-      console.log('contacts', contacts)
-        // Do something with the list of tasks
-    }).catch(error => {
-      // handle error
-      console.log('error', error)
-    })
+    // fetch('https://65228621f43b1793841497a2.mockapi.io/contacts/', {
+    //     method: 'GET',
+    //     headers: { 'content-type': 'application/json' },
+    // }).then(res => {
+    //     if (res.ok) {
+    //         return res.json();
+    //     }
+    //   console.log('resError', res)
+    //     // handle error
+    // }).then(data => {
+    //   console.log('data', data)
+    //     // Do something with the list of tasks
+    // }).catch(error => {
+    //   // handle error
+    //   console.log('error', error)
+  // })
+  
+  axios.get('https://6522ccd4f43b17938414ead7.mockapi.io')
+    .then(data => console.log('data', data))
+    .catch(error => console.log('error', error))
 
 // ===========================================
   const submitPhoneBook = event => {

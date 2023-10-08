@@ -1,3 +1,5 @@
+import axios from "axios";
+
 // export const FetchContacts = () => {
 //     fetch('https://65228621f43b1793841497a2.mockapi.io/contacts', {
 //         method: 'GET',
@@ -16,3 +18,10 @@
 
 //     return
 // };
+
+// axios.defaults.baseURL = 'https://65228621f43b1793841497a2.mockapi.io/contacts/';
+
+// export const FetchContacts = async () => {
+//     const response = await axios.get('https://65228621f43b1793841497a2.mockapi.io/contacts/');
+//     return response.data;
+// }
