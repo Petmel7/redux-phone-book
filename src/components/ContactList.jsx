@@ -1,10 +1,10 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { deleteContact } from './ContactsSlice';
+import { deleteContact } from '../redux/FetchContacts';
 
 
 const ContactList = ({ visibleСontactsFilter }) => {
-  // console.log('visibleСontactsFilter', visibleСontactsFilter)
+  console.log('visibleСontactsFilter', visibleСontactsFilter)
   const dispatch = useDispatch();
   
   return (

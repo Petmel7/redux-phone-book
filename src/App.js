@@ -6,9 +6,10 @@ import ContactList from "./components/ContactList";
 import './components/Contacts.css';
 import './App.css';
 import { useDispatch, useSelector } from "react-redux";
-import { addContact } from './components/ContactsSlice.js';
-import { setFilter } from "./components/FilterSlice";
-import axios from "axios";
+import { addContact } from './redux/ContactsSlice';
+import { setFilter } from "./redux/FilterSlice";
+// import axios from "axios";
+// import { FetchContacts } from './components/fetchContacts';
 
 function App() {
   const dispatch = useDispatch();
@@ -33,49 +34,28 @@ function App() {
 //     localStorage.setItem("items", JSON.stringify(contactsState));
   //   }, [contactsState]);
   
-  
-    // fetch('https://65228621f43b1793841497a2.mockapi.io/contacts/', {
-    //     method: 'GET',
-    //     headers: { 'content-type': 'application/json' },
-    // }).then(res => {
-    //     if (res.ok) {
-    //         return res.json();
-    //     }
-    //   console.log('resError', res)
-    //     // handle error
-    // }).then(data => {
-    //   console.log('data', data)
-    //     // Do something with the list of tasks
-    // }).catch(error => {
-    //   // handle error
-    //   console.log('error', error)
-  // })
-  
-  axios.get('https://6522ccd4f43b17938414ead7.mockapi.io')
-    .then(data => console.log('data', data))
-    .catch(error => console.log('error', error))
 
 // ===========================================
-  const submitPhoneBook = event => {
-    event.preventDefault();
+  // const submitPhoneBook = event => {
+  //   event.preventDefault();
 
-    const existingContact = contactsState.find(contact => contact.name === name);
-    if (existingContact) {
-      alert(`This name ${name} already exists`);
-      return;
-    }
+  //   const existingContact = contactsState.find(contact => contact.name === name);
+  //   if (existingContact) {
+  //     alert(`This name ${name} already exists`);
+  //     return;
+  //   }
 
-    const contact = { 
-      id: shortid.generate(),
-      name: name,
-      number: number,
-      completed: false
-    };
+  //   const contact = { 
+  //     id: shortid.generate(),
+  //     name: name,
+  //     number: number,
+  //     completed: false
+  //   };
 
-    dispatch(addContact(contact));
-    setName('');
-    setNumber('');
-  };
+  //   dispatch(addContact(contact));
+  //   setName('');
+  //   setNumber('');
+  // };
 
 // ===========================================
   const foneBookChange = event => {
@@ -88,16 +68,31 @@ function App() {
   };
 
   // ===========================================
-  const getVisibleСontacts = () => {
-    const normalizeFilter = filterState.toLowerCase();
+  // const getVisibleСontacts = () => {
+  //   const normalizeFilter = filterState.toLowerCase();
+      
+  //     return contactsState.filter(contact =>
+  //       contact.name.toLowerCase().includes(normalizeFilter)
+  //     )
+  // };
 
-      return contactsState.filter(contact =>
-        contact.name.toLowerCase().includes(normalizeFilter)
-      )
-  };
-  // console.log('contactsState filter;', contactsState);
+  const getVisibleСontacts = () => {
+  const normalizeFilter = filterState.toLowerCase();
+
+  return contactsState.filter(contact => {
+    // Перевірка, чи існує contact.name і чи він є рядком, перед викликом toLowerCase()
+    if (contact.name && typeof contact.name === "string") {
+      return contact.name.toLowerCase().includes(normalizeFilter);
+    }
+    return false;
+  });
+};
+
+  console.log('contactsState filter;', contactsState);
 
   const visibleСontactsFilter = getVisibleСontacts();
+
+  console.log('visibleСontactsFilter!!!!', visibleСontactsFilter)
 
 // ===========================================
   return (
@@ -106,7 +101,8 @@ function App() {
         name={name}
         number={number}
         foneBookChange={foneBookChange}
-        submitPhoneBook={submitPhoneBook}
+        // submitPhoneBook={submitPhoneBook}
+        contactsState={contactsState}
       />
 
       <h2>Contacts</h2>
