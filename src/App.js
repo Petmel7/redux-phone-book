@@ -8,7 +8,7 @@ import { setFilter } from "./redux/FilterSlice";
 // import { useEffect } from "react";
 // import { addContact } from "./redux/FetchContacts";
 
-export default App() {
+function App() {
   const dispatch = useDispatch();
   const contactsState = useSelector(state => state.contacts.items);
   const filterState = useSelector(state => state.filter);
