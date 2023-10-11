@@ -1,9 +1,9 @@
-import React from "react";
+
 import { useDispatch } from "react-redux";
 import { deleteContact } from '../../redux/FetchContacts';
 import { useEffect } from "react";
 import { fetchContacts } from '../../redux/FetchContacts';
-// import useContactLoading from '../../ownHook/useContactLoading';
+import css from './ContactList.module.css'
 
 const ContactList = ({ visibleСontactsFilter }) => {
     const dispatch = useDispatch();
@@ -13,16 +13,16 @@ const ContactList = ({ visibleСontactsFilter }) => {
     }, [dispatch]);
 
     return (
-        <ul className="name-number">
+        <ul className={css.contacts}>
             {visibleСontactsFilter.map((contact) => (
-                <li key={contact.id}>
-                    <p>{contact.name}</p>
-                    <p>{contact.number}</p>
-                    <div>
-                        <button onClick={() => dispatch(deleteContact(contact.id))}>
-                            Delete
-                        </button>
-                    </div>
+                <li className={css.contact} key={contact.id}>
+                    <p className={css.contactName}>{contact.name}</p>
+                    <p className={css.contactNumber}>{contact.number}</p>
+
+                    <button className={css.contactButton} onClick={() => dispatch(deleteContact(contact.id))}>
+                        Delete
+                    </button>
+                    
                 </li>
             ))}
         </ul>
@@ -33,6 +33,8 @@ export default ContactList;
 
 
 
+
+// import useContactLoading from '../../ownHook/useContactLoading';
 
 // const ContactList = ({ visibleСontactsFilter }) => {
 //     const dispatch = useDispatch();

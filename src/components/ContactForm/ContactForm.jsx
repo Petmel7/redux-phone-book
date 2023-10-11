@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import { addContact } from '../../redux/FetchContacts';
 import { useState } from 'react';
 import css from './ContactForm.module.css';
+import toast from 'react-hot-toast';
 
 const ContactForm = ({ contactsState }) => {
     const [name, setName] = useState('');
@@ -25,7 +26,11 @@ const ContactForm = ({ contactsState }) => {
 
         const existingContact = contactsState.find(contact => contact.name === name);
         if (existingContact) {
-            alert(`This name ${name} already exists`);
+            toast(<p className={css.toast}>
+                {`This name ${name} already exists`}
+            </p>);
+            setName('');
+            setNumber('');
             return;
         }
 
@@ -37,30 +42,32 @@ const ContactForm = ({ contactsState }) => {
     return (
         <form className={css.form}
             onSubmit={handleSubmit}>
-        
-            <label >
-                Name
-                <input
-                    className={css.formInput}
-                    type="text"
-                    name="name"
-                    value={name}
-                    required
-                    onChange={foneBookChange}
-                />
-            </label>
+            
+            <div className={css.formImputs}>
+                <label className={css.formLabel}>
+                    <p>Name</p>
+                    <input
+                        className={css.formInput}
+                        type="text"
+                        name="name"
+                        value={name}
+                        required
+                        onChange={foneBookChange}
+                    />
+                </label>
 
-            <label>
-                Number
-                <input
-                    className={css.formInput}
-                    type="tel"
-                    name="number"
-                    value={number}
-                    required
-                    onChange={foneBookChange}
-                />
-            </label>
+                <label className={css.formLabel}>
+                    <p>Number</p>
+                    <input
+                        className={css.formInput}
+                        type="tel"
+                        name="number"
+                        value={number}
+                        required
+                        onChange={foneBookChange}
+                    />
+                </label>
+            </div>
 
             <div className={css.formButton}>
                 <button className={css.formButtonSubmit}

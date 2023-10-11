@@ -1,0 +1,53 @@
+ul,
+li,
+p,
+button {
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+}
+
+.App {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    text-align: center;
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.AppContacts {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+.AppContactsName {
+    font-size: 20px;
+    margin: 5px 0;
+}
+
+.AppLabelSearch {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.AppInputSearch {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.AppInputSearch::placeholder {
+    color: #999;
+}
+
+.AppInputSearch:focus {
+    border-color: #007bff;
+}
