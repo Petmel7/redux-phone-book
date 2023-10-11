@@ -1,12 +1,12 @@
 import { useDispatch } from "react-redux";
 import { addContact } from '../../redux/FetchContacts';
 import { useState } from 'react';
+import css from './ContactForm.module.css';
 
-function ContactForm({ contactsState }) {
-    const dispatch = useDispatch();
-
+const ContactForm = ({ contactsState }) => {
     const [name, setName] = useState('');
     const [number, setNumber] = useState('');
+    const dispatch = useDispatch();
 
     const foneBookChange = event => {
         const { name, value } = event.target;
@@ -35,11 +35,13 @@ function ContactForm({ contactsState }) {
     };
 
     return (
-        <form className="form-group" onSubmit={handleSubmit}>
+        <form className={css.form}
+            onSubmit={handleSubmit}>
         
-            <label>
+            <label >
                 Name
                 <input
+                    className={css.formInput}
                     type="text"
                     name="name"
                     value={name}
@@ -51,6 +53,7 @@ function ContactForm({ contactsState }) {
             <label>
                 Number
                 <input
+                    className={css.formInput}
                     type="tel"
                     name="number"
                     value={number}
@@ -59,8 +62,9 @@ function ContactForm({ contactsState }) {
                 />
             </label>
 
-            <div className="Add-Contacts">
-                <button type="submit">Add Contacts</button>
+            <div className={css.formButton}>
+                <button className={css.formButtonSubmit}
+                    type="submit">Add Contacts</button>
             </div>
         </form>
     );

@@ -15,18 +15,6 @@ ul, li, p, button {
     margin-top: 50px;
 }
 
-.form-group {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
-    padding-top: 20px;
-    background-color: aqua;
-}
-
-.form-group input {
-    width: 260px;
-}
-
 .name-number {
     margin-top: 20px;
 }
@@ -36,15 +24,6 @@ ul, li, p, button {
     justify-content: center;
     margin-bottom: 5px;
     justify-content: space-between;
-}
-
-.Add-Contacts {
-    margin-top: 15px;
-    padding-bottom: 20px;
-}
-
-.Add-Contacts button {
-    padding: 5px 10px;
 }
 
 .Search {

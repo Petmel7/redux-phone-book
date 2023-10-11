@@ -1,9 +1,9 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { deleteContact } from '../../redux/FetchContacts';
 import { useEffect } from "react";
 import { fetchContacts } from '../../redux/FetchContacts';
-import useContactLoading from '../../ownHook/useContactLoading';
+// import useContactLoading from '../../ownHook/useContactLoading';
 
 const ContactList = ({ visibleСontactsFilter }) => {
     const dispatch = useDispatch();
