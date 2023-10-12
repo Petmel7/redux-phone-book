@@ -24,19 +24,22 @@ const ContactForm = ({ contactsState }) => {
         const name = event.target.elements.name.value;
         const number = event.target.elements.number.value;
 
+        const formReset = () => {
+            setName('');
+            setNumber('');
+        }
+
         const existingContact = contactsState.find(contact => contact.name === name);
         if (existingContact) {
             toast(<p className={css.toast}>
                 {`This name ${name} already exists`}
             </p>);
-            setName('');
-            setNumber('');
+            formReset();
             return;
         }
 
         dispatch(addContact({ name, number }));
-        setName('');
-        setNumber('');
+        formReset();
     };
 
     return (

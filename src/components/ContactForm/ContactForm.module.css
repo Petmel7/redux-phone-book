@@ -3,7 +3,7 @@
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    background: linear-gradient(135deg, #f06, #9f6, #06f);
+    background: linear-gradient(135deg, rgb(102, 102, 102), rgb(199, 199, 199), rgb(58, 58, 58));
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
     margin-bottom: 20px;
 }

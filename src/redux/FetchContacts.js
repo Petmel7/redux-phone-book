@@ -39,17 +39,3 @@ export const deleteContact = createAsyncThunk(
         }
     }
 );
-
-export const toggleCompleted = createAsyncThunk(
-    "tasks/toggleCompleted",
-    async (contacts, thunkAPI) => {
-        try {
-            const response = await axios.put(`/tasks/${contacts.id}`, {
-                completed: !contacts.completed,
-            });
-            return response.data;
-        } catch (e) {
-            return thunkAPI.rejectWithValue(e.message);
-        }
-    }
-);
