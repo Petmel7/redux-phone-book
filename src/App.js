@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { setFilter } from "./redux/FilterSlice";
+import { selectContacts, selectFilter } from './redux/Selectors';
 import ContactForm from "./components/ContactForm/ContactForm";
 import ContactList from "./components/ContactList/ContactList";
 import css from './App.module.css';
@@ -7,8 +8,9 @@ import { Toaster } from 'react-hot-toast';
 
 const App = () => {
   const dispatch = useDispatch();
-  const contactsState = useSelector(state => state.contacts.items);
-  const filterState = useSelector(state => state.filter);
+
+  const contactsState = useSelector(selectContacts);
+  const filterState = useSelector(selectFilter);
   
   const getVisibleСontacts = () => {
     const normalizeFilter = filterState.toLowerCase();

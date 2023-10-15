@@ -20,14 +20,17 @@ const ContactForm = ({ contactsState }) => {
 
     const handleSubmit = event => {
         event.preventDefault();
-    
-        const name = event.target.elements.name.value;
-        const number = event.target.elements.number.value;
 
         const formReset = () => {
             setName('');
             setNumber('');
         }
+
+        dispatch(addContact({
+            name: event.target.elements.name.value,
+            number: event.target.elements.number.value
+        }));
+        formReset();
 
         const existingContact = contactsState.find(contact => contact.name === name);
         if (existingContact) {
@@ -37,9 +40,6 @@ const ContactForm = ({ contactsState }) => {
             formReset();
             return;
         }
-
-        dispatch(addContact({ name, number }));
-        formReset();
     };
 
     return (
